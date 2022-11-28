@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:startup_namer/main.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,6 +23,7 @@ class MyApp extends StatelessWidget {
 }
 
 class pertemuan9 extends StatefulWidget {
+  //pertemuan9(Key key, this.title) : super(key:key);
   const pertemuan9({super.key, required this.title});
 
   final String title;
@@ -30,6 +33,7 @@ class pertemuan9 extends StatefulWidget {
 }
 
 class _pertemuan9State extends State<pertemuan9> {
+
   int _counter = 0;
 
   void _incrementCounter() {
@@ -50,8 +54,11 @@ class _pertemuan9State extends State<pertemuan9> {
           children: <Widget>[
             TextFormField(
               decoration: new InputDecoration(
-                labelText: "Tex Input",
-                hintText: "Teks yang akan diinput formatnya adalah sbb",
+                labelText: "Email or Username",
+                hintText: "Input at least 8-15 Letters",
+                  border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(5)
+                  )
               ),
             ),
             Padding(
@@ -59,19 +66,35 @@ class _pertemuan9State extends State<pertemuan9> {
             ),
             TextFormField(
               decoration: new InputDecoration(
-                labelText: "Tex Input 2",
-                hintText: "Teks yang akan diinput formatnya adalah sbb",
+                labelText: "Password",
+                hintText: "Need 3 different number",
                 border: OutlineInputBorder(
                   borderRadius: new BorderRadius.circular(5)
                 )
               ),
             ),
-            ElevatedButton(onPressed: (){}, child: Text(
+            ElevatedButton(onPressed: (){
+
+            }, child: Text(
               "Submit",
               style: TextStyle(
                 color: Colors.white
               ),
+            )),
+
+            ElevatedButton(onPressed: () async {
+              SharedPreferences pref = await SharedPreferences.getInstance();
+              await pref.setInt("is_login", 0);
+              Navigator.pushReplacement(
+                  context,
+              MaterialPageRoute(builder: (context) => MyHomePage(title: "Halo"));
+            }, child: Text(
+              "Logout",
+              style: TextStyle(
+                  color: Colors.white
+              ),
             ))
+
           ],
         ),
       ),
