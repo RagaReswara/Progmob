@@ -1,9 +1,24 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:splashscreen/splashscreen.dart';
 import 'package:startup_namer/pertemuan9.dart';
+import 'splashScreen.dart';
 
 void main() {
-  runApp(const MyApp());
+  HttpOverrides.global = new MyHttpOverrides();
+  runApp(new MaterialApp(
+    home: SplashScreen(title: "Splash Screen"),
+  ));
+}
+
+class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+  }
 }
 
 /*class MyApp extends StatelessWidget {

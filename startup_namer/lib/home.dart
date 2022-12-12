@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'mahasiswa/mahasiswa_get.dart';
 
 void main() {
   runApp(const MaterialApp(
     home: Home(),
   ));
 }
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -53,6 +55,15 @@ class _HomeState extends State<Home> {
                 onTap: () {
                   // Update the state of the app.
                   // ...
+                },
+              ),
+              ListTile(
+                title: const Text('Mahasiswa'),
+                onTap: () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Mahasiswa_get()));
                 },
               ),
             ],
